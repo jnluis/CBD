@@ -1,0 +1,21 @@
+// limit = 2;
+// timeslot = 30000;
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+Joao;couve;
+Pedido do utilizador: Joao [produto: couve] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+Joao;laranja;
+Pedido do utilizador: Joao [produto: laranja] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+Joao;banana;
+ERROR: Já passou o numero de pedidos nesta janela temporal;
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+Joao;banana;
+Pedido do utilizador: Joao [produto: banana] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+q
+Saindo...

@@ -1,0 +1,357 @@
+// NMEC: 107403
+
+# 1. Liste a informação de cada ciclista existente na BD
+
+match(n:Cyclist)
+return DISTINCT n.Name as Nome_Ciclista, n.age AS Idade,n.points AS Pontos, n.jersey_num AS Dorsal_nº
+
+# Parte da Resposta ao 1
+Nome_Ciclista                │Idade│Pontos│Dorsal_nº│
+╞═════════════════════════════╪═════╪══════╪═════════╡
+│"Millar David"               │23.0 │100.0 │127.0    │
+├─────────────────────────────┼─────┼──────┼─────────┤
+│"Armstrong Lance"            │28.0 │0.0   │1.0      │
+├─────────────────────────────┼─────┼──────┼─────────┤
+│"Jalabert Laurent"           │31.0 │50.0  │51.0     │
+├─────────────────────────────┼─────┼──────┼─────────┤
+│"Ullrich Jan"                │26.0 │40.0  │61.0     │
+├─────────────────────────────┼─────┼──────┼─────────┤
+│"Cañada David"               │25.0 │32.0  │52.0     │
+├─────────────────────────────┼─────|──────|─────────┤
+
+#2 Liste o nome dos ciclistas e total de etapas em que cada um correu.
+
+MATCH (c:Cyclist)-[:RANKED_ON]->(st:Stage)
+RETURN c.Name AS cyclist_name, COUNT(st) AS total_stages
+ORDER BY total_stages DESC;
+
+# Parte da resposta ao 2
+
+cyclist_name                  │total_stages│
+╞═════════════════════════════╪════════════╡
+│"Chavanel Sylvain"           │226         │
+├─────────────────────────────┼────────────┤
+│"Voigt Jens"                 │214         │
+├─────────────────────────────┼────────────┤
+│"Zubeldia Haimar"            │213         │
+├─────────────────────────────┼────────────┤
+│"Pascual Javier"             │190         │
+├─────────────────────────────┼────────────┤
+│"Mollema Bauke"              │180         │
+├─────────────────────────────┼────────────┤
+│"Greipel André"              │180         │
+├─────────────────────────────┼────────────┤
+│"Schär Michael"              │177         │
+├─────────────────────────────┼────────────┤
+│"Erviti Imanol"              │176         │
+├─────────────────────────────┼────────────┤
+│"Gallopin Tony"              │173         │
+├─────────────────────────────┼────────────┤
+
+#3 Apresente todas as equipas que participaram nos últimos 2 anos;
+
+MATCH (y:Year)<-[:BELONGS_TO]-(st:Stage)<-[:RANKED_ON]-(c:Cyclist)-[:RUNS_FOR]->(t:Team)
+WHERE y.year >= 2017 
+RETURN DISTINCT t.team_name AS team_name;
+
+╒═══════════════════════════════════════════════╕
+│team_name                                      │
+╞═══════════════════════════════════════════════╡
+│"BMC Racing Team"                              │
+├───────────────────────────────────────────────┤
+│"Movistar Team"                                │
+├───────────────────────────────────────────────┤
+│"AG2R La Mondiale"                             │
+├───────────────────────────────────────────────┤
+│"FDJ"                                          │
+├───────────────────────────────────────────────┤
+│"Astana Pro Team"                              │
+├───────────────────────────────────────────────┤
+│"\"Cofidis, Solutions Crédits\""               │
+├───────────────────────────────────────────────┤
+│"Team Sky"                                     │
+├───────────────────────────────────────────────┤
+│"Team LottoNL-Jumbo"                           │
+├───────────────────────────────────────────────┤
+│"Lotto Soudal"                                 │
+├───────────────────────────────────────────────┤
+│"Team Dimension Data"                          │
+├───────────────────────────────────────────────┤
+│"Trek - Segafredo"                             │
+├───────────────────────────────────────────────┤
+│"Direct Energie"                               │
+├───────────────────────────────────────────────┤
+│"Cannondale-Drapac Pro Cycling Team"           │
+├───────────────────────────────────────────────┤
+│"Team Katusha Alpecin"                         │
+├───────────────────────────────────────────────┤
+│"Quick-Step Floors"                            │
+├───────────────────────────────────────────────┤
+│"Team Sunweb"                                  │
+├───────────────────────────────────────────────┤
+│"ORICA-Scott"                                  │
+├───────────────────────────────────────────────┤
+│"BORA - hansgrohe"                             │
+├───────────────────────────────────────────────┤
+│"Bahrain Merida Pro Cycling Team"              │
+├───────────────────────────────────────────────┤
+│"UAE Team Emirates"                            │
+├───────────────────────────────────────────────┤
+│"Fortuneo - Oscaro"                            │
+├───────────────────────────────────────────────┤
+│"Wanty - Groupe Gobert"                        │
+├───────────────────────────────────────────────┤
+│"UAE-Team Emirates"                            │
+├───────────────────────────────────────────────┤
+│"Team Fortuneo - Samsic"                       │
+├───────────────────────────────────────────────┤
+│"Groupama - FDJ"                               │
+├───────────────────────────────────────────────┤
+│"Team EF Education First-Drapac p/b Cannondale"│
+├───────────────────────────────────────────────┤
+│"Mitchelton-Scott"                             │
+├───────────────────────────────────────────────┤
+│"Team Jumbo-Visma"                             │
+├───────────────────────────────────────────────┤
+│"Bahrain Merida"                               │
+├───────────────────────────────────────────────┤
+│"Deceuninck - Quick Step"                      │
+├───────────────────────────────────────────────┤
+│"CCC Team"                                     │
+├───────────────────────────────────────────────┤
+│"EF Education First"                           │
+├───────────────────────────────────────────────┤
+│"Wanty - Gobert Cycling Team"                  │
+├───────────────────────────────────────────────┤
+│"Team Arkéa Samsic"                            │
+├───────────────────────────────────────────────┤
+│"Team Total Direct Energie"                    │
+├───────────────────────────────────────────────┤
+│"Team INEOS"                                   │
+└───────────────────────────────────────────────┘
+
+#4. Encontre todos os pares de ciclistas que atuaram em vários anos juntos e que são da mesma equipa.
+MATCH (c1:Cyclist)-[:RUNS_FOR]->(t:Team)<-[:RUNS_FOR]-(c2:Cyclist),
+(c1)-[:RANKED_ON]->(:Stage)<-[:BELONGS_TO]-(y:Year),
+(c2)-[:RANKED_ON]->(:Stage)<-[:BELONGS_TO]-(y)
+WHERE c1 <> c2
+WITH c1, c2, t, COUNT(DISTINCT y) AS yearsTogether
+WHERE yearsTogether > 1
+RETURN c1.Name AS cyclist1, c2.Name AS cyclist2, t.team_name AS team, yearsTogether
+ORDER BY yearsTogether DESC;
+
+#5 Determine a idade média do pelotão na edição centenária do Tour de France.
+
+MATCH (c:Cyclist)-[:RANKED_ON]->(st:Stage)
+WHERE st.edition = 100
+RETURN AVG(c.age) AS averageAge, st.edition
+
+╒════════════════╤══════════╕
+│averageAge      │st.edition│
+╞════════════════╪══════════╡
+│29.0064316953949│100       │
+└────────────────┴──────────┘
+
+#6. Qual é o caminho mais curto entre Rigoberto Uran e Ben Swift?
+
+MATCH path=shortestPath((c1:Cyclist {Name: "Úran Rigoberto"})-[*]-(c2:Cyclist {Name: "Swift Ben"}))
+RETURN path
+
+#7. Encontre as equipas com mais vitórias em etapas
+
+MATCH (t:Team)<-[:RUNS_FOR]-(c:Cyclist)-[r:RANKED_ON]->(st:Stage)
+WHERE r.rank = '1'
+RETURN t.team_name AS Team, COUNT(st) AS StageWins
+ORDER BY StageWins DESC
+
+╒════════════════════════════════════╤═════════╕
+│Team                                │StageWins│
+╞════════════════════════════════════╪═════════╡
+│"Rabobank ProTeam"                  │18       │
+├────────────────────────────────────┼─────────┤
+│"US Postal Service"                 │18       │
+├────────────────────────────────────┼─────────┤
+│"Mapei - Quickstep"                 │12       │
+├────────────────────────────────────┼─────────┤
+│"Team Telekom"                      │12       │
+├────────────────────────────────────┼─────────┤
+│"Sky Procycling"                    │11       │
+├────────────────────────────────────┼─────────┤
+│"Lotto Soudal"                      │10       │
+├────────────────────────────────────┼─────────┤
+│"Kelme - Costa Blanca"              │9        │
+├────────────────────────────────────┼─────────┤
+│"Quick-Step Floors"                 │9        │
+├────────────────────────────────────┼─────────┤
+│"Movistar Team"                     │8        │
+├────────────────────────────────────┼─────────┤
+│"Astana Pro Team"                   │8        │
+├────────────────────────────────────┼─────────┤
+│"Omega Pharma - Quick-Step"         │7        │
+├────────────────────────────────────┼─────────┤
+│"Team Sky"                          │7        │
+├────────────────────────────────────┼─────────┤
+│"Mercatone Uno - Albacom"           │6        │
+├────────────────────────────────────┼─────────┤
+│"CSC ProTeam - Tiscali"             │6        │
+├────────────────────────────────────┼─────────┤
+│"Crédit Agricole"                   │6        │
+├────────────────────────────────────┼─────────┤
+│"Lotto - Adecco"                    │6        │
+├────────────────────────────────────┼─────────┤
+│"HTC - High Road"                   │6        │
+├────────────────────────────────────┼─────────┤
+│"AG2R La Mondiale"                  │6        │
+├────────────────────────────────────┼─────────┤
+│"Team Dimension Data"               │6        │
+├────────────────────────────────────┼─────────┤
+│"BORA - hansgrohe"                  │6        │
+├────────────────────────────────────┼─────────┤
+│"BMC Racing Team"                   │5        │
+├────────────────────────────────────┼─────────┤
+│"Team Katusha"                      │5        │
+├────────────────────────────────────┼─────────┤
+│"Team Sunweb"                       │5        │
+├────────────────────────────────────┼─────────┤
+│"Team LottoNL-Jumbo"                │5        │
+├────────────────────────────────────┼─────────┤
+│"Euskaltel - Euskadi"               │4        │
+├────────────────────────────────────┼─────────┤
+│"Omega Pharma-Lotto"                │4        │
+├────────────────────────────────────┼─────────┤
+│"Team Garmin - Cervélo"             │4        │
+├────────────────────────────────────┼─────────┤
+│"Team Europcar"                     │4        │
+├────────────────────────────────────┼─────────┤
+│"Lotto Belisol Team"                │4        │
+├────────────────────────────────────┼─────────┤
+│"Team Argos - Shimano"              │4        │
+├────────────────────────────────────┼─────────┤
+│"Team Giant - Shimano"              │4        │
+├────────────────────────────────────┼─────────┤
+│"Tinkoff - Saxo"                    │4        │
+├────────────────────────────────────┼─────────┤
+│"Etixx - Quick Step"                │4        │
+├────────────────────────────────────┼─────────┤
+│"Team Jumbo-Visma"                  │4        │
+├────────────────────────────────────┼─────────┤
+│"Mitchelton-Scott"                  │4        │
+├────────────────────────────────────┼─────────┤
+│"Cofidis"                           │3        │
+├────────────────────────────────────┼─────────┤
+│"O.N.C.E. - Deutsche Bank"          │3        │
+├────────────────────────────────────┼─────────┤
+│"Festina - Lotus"                   │3        │
+├────────────────────────────────────┼─────────┤
+│"AG2R Prevoyance"                   │3        │
+├────────────────────────────────────┼─────────┤
+│"Banesto"                           │3        │
+├────────────────────────────────────┼─────────┤
+│"Polti"                             │3        │
+├────────────────────────────────────┼─────────┤
+│"Saeco"                             │3        │
+├────────────────────────────────────┼─────────┤
+│"Festina"                           │3        │
+├────────────────────────────────────┼─────────┤
+│"AG2R Prévoyance"                   │3        │
+├────────────────────────────────────┼─────────┤
+│"Fassa Bortolo"                     │3        │
+├────────────────────────────────────┼─────────┤
+│"Lampre - Daikin"                   │3        │
+├────────────────────────────────────┼─────────┤
+│"Liquigas - Cannondale"             │3        │
+├────────────────────────────────────┼─────────┤
+│"Garmin Sharp"                      │3        │
+├────────────────────────────────────┼─────────┤
+│"Team Giant - Alpecin"              │3        │
+├────────────────────────────────────┼─────────┤
+│"Tinkoff"                           │3        │
+├────────────────────────────────────┼─────────┤
+│"Deceuninck - Quick Step"           │3        │
+├────────────────────────────────────┼─────────┤
+│"Rabobank Cycling Team"             │2        │
+├────────────────────────────────────┼─────────┤
+│"FDJ - BigMat"                      │2        │
+├────────────────────────────────────┼─────────┤
+│"Orica GreenEDGE"                   │2        │
+├────────────────────────────────────┼─────────┤
+│"Lotto Belisol"                     │2        │
+├────────────────────────────────────┼─────────┤
+│"FDJ"                               │2        │
+├────────────────────────────────────┼─────────┤
+│"Trek - Segafredo"                  │2        │
+├────────────────────────────────────┼─────────┤
+│"UAE-Team Emirates"                 │2        │
+├────────────────────────────────────┼─────────┤
+│"Groupama - FDJ"                    │2        │
+├────────────────────────────────────┼─────────┤
+│"Bahrain Merida"                    │2        │
+├────────────────────────────────────┼─────────┤
+│"Leopard Trek"                      │1        │
+├────────────────────────────────────┼─────────┤
+│"RadioShack - Nissan"               │1        │
+├────────────────────────────────────┼─────────┤
+│"RadioShack - Leopard"              │1        │
+├────────────────────────────────────┼─────────┤
+│"Cannondale Pro Cycling Team"       │1        │
+├────────────────────────────────────┼─────────┤
+│"Belkin-Pro Cycling Team"           │1        │
+├────────────────────────────────────┼─────────┤
+│"MTN - Qhubeka"                     │1        │
+├────────────────────────────────────┼─────────┤
+│"Lampre - Merida"                   │1        │
+├────────────────────────────────────┼─────────┤
+│"ORICA-BikeExchange"                │1        │
+├────────────────────────────────────┼─────────┤
+│"IAM Cycling"                       │1        │
+├────────────────────────────────────┼─────────┤
+│"Direct Energie"                    │1        │
+├────────────────────────────────────┼─────────┤
+│"Cannondale-Drapac Pro Cycling Team"│1        │
+└────────────────────────────────────┴─────────┘
+
+#8. Apresente os 3 ciclistas mais novos a ganhar uma etapa no Tour de France e o ano em que a ganharam
+
+MATCH (c:Cyclist)-[r:RANKED_ON]->(st:Stage)-[:BELONGS_TO]>(y:Year)
+WHERE r.rank = '1'
+RETURN DISTINCT c.Name AS Cyclist, c.age AS Age, y
+ORDER BY c.age ASC
+LIMIT 3
+
+╒═══════════════╤════╤════════════════════╕
+│Cyclist        │Age │y                   │
+╞═══════════════╪════╪════════════════════╡
+│"Sagan Peter"  │22.0│(:Year {year: 2012})│
+├───────────────┼────┼────────────────────┤
+│"Pinot Thibaut"│22.0│(:Year {year: 2012})│
+├───────────────┼────┼────────────────────┤
+│"Millar David" │23.0│(:Year {year: 2000})│
+└───────────────┴────┴────────────────────┘
+
+#9. Apresentar todos os ciclistas que já correram em mais do que uma equipa
+
+MATCH (c:Cyclist)-[:RUNS_FOR]->(t:Team)
+WITH c, COUNT(DISTINCT t) AS TeamsCount
+WHERE TeamsCount > 1
+RETURN c.Name AS Cyclist, TeamsCount
+ORDER BY TeamsCount DESC
+
+╒════════════════════════════════════╤══════════╕
+│Cyclist                             │TeamsCount│
+╞════════════════════════════════════╪══════════╡
+│"Úran Rigoberto"                    │5         │
+├────────────────────────────────────┼──────────┤
+│"Sagan Peter"                       │4         │
+├────────────────────────────────────┼──────────┤
+│"Armstrong Lance"                   │3         │
+├────────────────────────────────────┼──────────┤
+│"Voigt Jens"                        │3         │
+├────────────────────────────────────┼──────────┤
+
+#10 Encontrar ciclistas que melhoraram o seu desempenho ao longo dos anos
+
+MATCH (c:Cyclist)-[r1:RANKED_ON]->(s1:Stage)<-[:BELONGS_TO]-(y1:Year),
+      (c)-[r2:RANKED_ON]->(s2:Stage)<-[:BELONGS_TO]-(y2:Year)
+WHERE y1.year < y2.year AND r1.rank >r2.rank
+RETURN c.Name AS Cyclist, y1.year AS Year1, r1.rank AS Rank1, y2.year AS Year2, r2.rank AS Rank2
+ORDER BY (r1.rank - r2.rank) DESC

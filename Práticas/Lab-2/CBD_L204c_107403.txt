@@ -1,0 +1,13 @@
+Redis e MongoDB utilizam estruturas de dados diferentes para guardar a informação, sendo a primeira baseada numa estrutura chave-valor. 
+Assim, costuma ser usada para armazenar estruturas de dados simples e eficaz para caching/armazenamento de dados temporários. É também simples de configurar e usar.
+Já MongoDB é uma base de dados documental, sendo mais flexível e mais adequada quando a estrutura de dados se altera e normalmente requer consultas mais complexas.
+
+Assim, os contras das 2 implementações são que o Redis é um pouco limitado pela memória para o armazenamento e pode dar problemas para o armazenamento duradouro de grandes volumes de dados.
+Já os contras do MongoDB são que o desempenho pode facilmente degradar-se para operações de leitura e escrita simples, e, dependendo do sistema a desenvolver,
+a configuração pode tornar-se mais complexa para desenvolvedores com pouca experiência. Para além disto, o MongoDB requer também mais recursos de Hardware. 
+
+Assim, tendo por base estes argumentos e imaginando que o volume de dados a usar neste problema seria muito maior (o professor disse para pensar nisto para o infinito),
+penso que a solução que se adequa melhor ao problema é a do MongoDB uma vez que seria necessário armazenar todos os pedidos para cada utilizador, e
+porque, para este problema, para trabalhar os dados e obter algumas métricas sobre eles, seriam utilizadas algumas queries mais complexas, para as quais os Mongo oferece
+maior suporte.
+No entanto, a utilização de Redis não seria uma escolha muito má.

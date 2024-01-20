@@ -1,0 +1,38 @@
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+mario;banana
+Pedido do utilizador: mario [produto: banana] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+mario;pessego 
+Pedido do utilizador: mario [produto: pessego] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+mario;maca
+ERROR: Já passou o numero de pedidos nesta janela temporal;
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+mario;laranja
+ERROR: Já passou o numero de pedidos nesta janela temporal;
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+mario;laranja
+Pedido do utilizador: mario [produto: laranja] aceite com sucesso
+
+Insira o seu nome e o seu pedido, seguido ambos de um ';', ou prima 'q' para sair
+q
+Saindo...
+
+No mongo, fazendo db.orders.find(), temos:
+
+Att> db.orders.find()
+[
+  {
+    _id: ObjectId("652ef3b9b38a2906f45f483c"),
+    mario: {
+      products: [
+        { product: 'banana', TS: 1063783648 },
+        { product: 'pessego', TS: 1063791961 },
+        { product: 'laranja', TS: 1063814278 }
+      ]
+    }
+  }
+]
+

@@ -1,0 +1,33 @@
+Insira o seu nome, o seu pedido e a respetiva quantidade, seguido ambos de um ';', ou prima 'q' para sair
+js;laranja;2
+Pedido do utilizador: js [produto: laranja ,quantidade 2] aceite com sucesso
+
+Insira o seu nome, o seu pedido e a respetiva quantidade, seguido ambos de um ';', ou prima 'q' para sair
+js;maca;1
+Pedido do utilizador: js [produto: maca ,quantidade 1] aceite com sucesso
+
+Insira o seu nome, o seu pedido e a respetiva quantidade, seguido ambos de um ';', ou prima 'q' para sair
+js;pera;3
+ERROR: Já passou a quantidade de produto permitida nesta janela temporal;
+Insira o seu nome, o seu pedido e a respetiva quantidade, seguido ambos de um ';', ou prima 'q' para sair
+js;pera;3
+Pedido do utilizador: js [produto: pera ,quantidade 3] aceite com sucesso
+
+Insira o seu nome, o seu pedido e a respetiva quantidade, seguido ambos de um ';', ou prima 'q' para sair
+q
+Saindo...
+
+No mongo, db.orders.find(), temos:
+[
+  {
+    _id: ObjectId("653a40cd5058031b2056056f"),
+    js: {
+      products: [
+        { product: 'laranja', qty: 2, TS: 1804411962 },
+        { product: 'maca', qty: 1, TS: 1804419072 },
+        { product: 'pera', qty: 3, TS: 1804455292 }
+      ]
+    }
+  }
+]
+

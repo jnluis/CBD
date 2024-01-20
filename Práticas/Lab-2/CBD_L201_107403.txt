@@ -1,0 +1,25 @@
+show dbs
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+
+db.createCollection("test_collection")
+{ ok: 1 }
+show collections
+test_collection
+
+db.test_collection.insert({title: "Titulo", pages: 483 })
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("65155ffe9def1611c388b0ee") }
+}
+
+test_db> db.test_collection.find()
+[
+  {
+    _id: ObjectId("65155ffe9def1611c388b0ee"),
+    title: 'Titulo',
+    pages: 483
+  }
+]

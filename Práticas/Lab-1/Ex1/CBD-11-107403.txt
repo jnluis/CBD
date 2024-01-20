@@ -1,0 +1,25 @@
+help
+sudo service redis-server stop
+quit
+SET PrimeiraKey "value"
+keys +
+keys *
+GET PrimeiraKey
+APPEND PrimeiraKey 2valor
+GET PrimeiraKey
+STRLEN PrimeiraKey
+SET chave valor
+GET *
+keys *
+values *
+SADD myset ["Hello", "World"]
+SADD myset Hello
+SADD myset World, Mundo
+SADD myset !
+scard myset
+smembers myset
+SISMEMBER myset !
+SISMEMBER myset ?
+SORT myset ALPHA
+myset
+SMEMBERS myset

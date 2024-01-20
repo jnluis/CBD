@@ -1,0 +1,20 @@
+RPUSH minhalista "Olá"
+RPUSH minhalista "Mundo"
+RPUSH minhalista "?"
+LRANGE minhalista 0 -1
+LLEN minhalista
+
+
+LSET minhalista -1 "!"
+LINSERT minhalista AFTER "Mundo" "2"
+LPOS minhalista "2"
+
+HSET oHash field1 "Hash" field2 "Sera" field3 "Mesmo"
+HGET oHash field1
+HGET oHash field3
+
+HGETALL oHash
+
+HVALS oHash
+HSTRLEN oHash field3
+HEXISTS OHash campos
