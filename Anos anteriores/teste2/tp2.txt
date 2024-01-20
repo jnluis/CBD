@@ -1,0 +1,6 @@
+TP2 CBD
+V e F de Cassandra neo4j e BDS distribuidas e paralelas
+- cenário leaderless descrever a falha e recuperação de um no
+- cenário com skew e hot spots num sistema Key range Partition descrever uma possível solução
+- map reduce do hadoop em código descrever inputs e outputs
+- aplicar o map reduce

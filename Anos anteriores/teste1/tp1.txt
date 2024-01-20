@@ -1,0 +1,13 @@
+1 teste teorico cbd:
+4 mongo mesmo prática
+Ver se query está certa, se não estiver corrigir e explicar
+Escrever uma query para listar unicamente o nome de todos os restaurantes por ordem crescente
+(Falta aqui uma) element match tinha query e tínhamos de dizer o que fazia - listar os restaurantes com Score superior a 85
+Explicar um agregate e escrever o seu output
+4 redis mesmo prática 
+Sadd, lpush, hget, - explicar o que faziam
+
+Chave de Cassandra
+OLTP vs OLAP
+Append log, vantagens e desvantagens
+Persistência poliglot
